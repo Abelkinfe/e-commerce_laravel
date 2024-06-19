@@ -15,4 +15,8 @@ class VarietyOption extends Model
     public function productitem(){
         return $this->belongsToMany(ProductItem::class);
     }
+    public function configItemProducts()
+    {
+        return $this->hasMany(ConfigItemProduct::class);
+    }
 }

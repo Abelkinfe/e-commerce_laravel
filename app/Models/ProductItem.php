@@ -20,5 +20,9 @@ class ProductItem extends Model
 
         return $this->hasMany(ShoppingCartItem::class);
     }
+    public function configItemProducts()
+    {
+        return $this->hasMany(ConfigItemProduct::class);
+    }
 
 }

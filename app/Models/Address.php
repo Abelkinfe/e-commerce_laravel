@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    protected $table = 'addresses';
-    public function Users() {
-        return $this->belongsToMany(User::class );
-    }
-    public function Country()
-    {
-        return $this->belongsTo(Country::class);
-    }
+    
     use HasFactory;
+    protected $fillable = ['city', 'region', 'country_id'];
+    protected $table = 'addresses';
+public function Users() {
+    return $this->belongsToMany(User::class );
+}
+public function Country()
+{
+    return $this->belongsTo(Country::class);
+}
 }

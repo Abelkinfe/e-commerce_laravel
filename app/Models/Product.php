@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {  use HasFactory;
-    protected $fillable = ['name','description','category_id','creator_user_id'];
+    protected $fillable = ['name','description','product_img','category_id','creator_user_id'];
 
     public function category(){
         return $this->belongsTo(Category::class);
@@ -15,7 +15,7 @@ class Product extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function productitem(){
+    public function productItems(){
         return $this->hasMany(ProductItem::class);
     }
   

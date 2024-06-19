@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
+   
+
+
+    use HasFactory;
     protected $table = 'countries';
 
    
@@ -20,7 +24,4 @@ class Country extends Model
     {
         return $this->hasMany(Address::class);
     }
-
-
-    use HasFactory;
 }

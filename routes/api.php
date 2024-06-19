@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CardlistController;
+use App\Http\Controllers\DetailforController;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\GetsellproductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\PaymentformController;
+use App\Http\Controllers\ProductcardController;
+use App\Http\Controllers\ProductcardlistController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductlinkController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\User;
 use App\Http\Controllers\UserAuth;
@@ -38,3 +43,8 @@ Route::middleware(['auth:sanctum'])->get('getproduct', [GetsellproductController
 Route::middleware(['auth:sanctum'])->post('paymentform', [PaymentformController::class, 'paymentform']);
 Route::get('/subcategory/{categoryId}', [SubcategoryController::class, 'subcategory']);
 Route::get('/cardlist', [CardlistController::class, 'cardlist']);
+Route::middleware(['auth:sanctum'])->get('productcard', [ProductcardController::class, 'productcard']);
+Route::middleware(['auth:sanctum'])->get('productcardlist', [ProductcardlistController::class, 'Productcardlist']);
+Route::middleware(['auth:sanctum'])->get('/productlink', [ProductlinkController::class, 'productlink']);
+Route::post('address', [AddressController::class, 'address']);
+Route::get('/detailfor/{category_id}', [DetailforController::class, 'detailfor']);
