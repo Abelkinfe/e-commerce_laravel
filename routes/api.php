@@ -3,11 +3,13 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CardlistController;
 use App\Http\Controllers\DetailforController;
+use App\Http\Controllers\DetailpayController;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\GetsellproductController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\PaymentformController;
+use App\Http\Controllers\PayproductdetailController;
 use App\Http\Controllers\ProductcardController;
 use App\Http\Controllers\ProductcardlistController;
 use App\Http\Controllers\ProductController;
@@ -48,3 +50,5 @@ Route::middleware(['auth:sanctum'])->get('productcardlist', [ProductcardlistCont
 Route::middleware(['auth:sanctum'])->get('/productlink', [ProductlinkController::class, 'productlink']);
 Route::post('address', [AddressController::class, 'address']);
 Route::get('/detailfor/{category_id}', [DetailforController::class, 'detailfor']);
+Route::middleware(['auth:sanctum'])->post('/transactions/initialize', [DetailpayController::class, 'initializeTransaction']);
+Route::get('/paydetailproduct/{id}', [PayproductdetailController::class, 'paydetail']);

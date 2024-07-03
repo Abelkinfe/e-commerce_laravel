@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class DetailforController extends Controller
@@ -11,18 +10,18 @@ class DetailforController extends Controller
     public function detailfor($category_id)
     {
         try {
-            // $user = User::find(auth()->user()->id);
-
-            
             $products = Product::where('category_id', $category_id)
                 ->with(['productItems.configItemProducts.varietyOption.variety'])
                 ->get()
                 ->map(function ($product) {
                     $productDetails = $product->productItems->map(function ($productItem) {
                         $varietyDetails = $productItem->configItemProducts->map(function ($configItemProduct) {
+                           
+                            $varietyName = $configItemProduct->varietyOption->variety->name ?? null;
+                            \Log::info('Variety Name:', ['varietyName' => $varietyName]);
                             return [
-                                'variety' => $configItemProduct->varietyOption->variety->name,
-                                'variety_option' => $configItemProduct->varietyOption->value,
+                                'variety' => $varietyName,
+                                'variety_option' => $configItemProduct->varietyOption->value ?? null,
                             ];
                         })->first();
 
@@ -35,6 +34,7 @@ class DetailforController extends Controller
                     })->first();
 
                     return [
+                        'id' => $product->id, 
                         'name' => $product->name,
                         'description' => $product->description,
                         'product_img' => $product->product_img,
@@ -45,7 +45,6 @@ class DetailforController extends Controller
                     ];
                 });
 
-            // Log and return JSON response
             \Log::info('Products:', $products->toArray());
 
             if ($products->isEmpty()) {

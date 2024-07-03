@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('variety_options', function (Blueprint $table) {
             $table->id();
-            $table->char('value');
+            $table->char('value')->nullable();
             $table->unsignedBigInteger('variety_id');
             $table->foreign('variety_id')->references('id')->on('varieties')->onDelete('cascade');
             $table->timestamps();

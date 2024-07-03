@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 class CardlistController extends Controller
 {
-    public function cardlist()
+    public function cardlist($id)
     {
-        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
-        ->where('categories.parent_category_id', )
-        ->orderBy('products.created_at', 'desc')
-        ->take(4)
-        ->get(['products.name', 'products.product_img']);
+        $products = Product::select('id','name','price')
+            ->join('product_items', 'products.id', 'product_items.product_id')
+            ->join('config_item_products', 'product_items.id', 'config_item_products.product_item_id')
+            ->join('variety_options', 'config_item_products.variety_option_id', 'variety_options.id')
+            ->join('varieties', 'vartiety_options.variety_id', 'varieties.id')->where('products.id', $id)->first();
 
         return response()->json($products);
     }

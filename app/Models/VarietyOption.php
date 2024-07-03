@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VarietyOption extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['value','variety_id'];
     public function variety(){
         return $this->belongsTo(Variety::class);
     }

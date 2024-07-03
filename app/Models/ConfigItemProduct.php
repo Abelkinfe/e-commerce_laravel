@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ConfigItemProduct extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_item_id', 'variation_option_id'];
+    protected $fillable = ['product_item_id', 'variety_option_id'];
 
     public function productItem()
     {
