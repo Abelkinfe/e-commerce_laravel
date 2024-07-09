@@ -20,3 +20,4 @@ class VarietyOption extends Model
         return $this->hasMany(ConfigItemProduct::class);
     }
 }
+ 

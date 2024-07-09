@@ -12,8 +12,10 @@ class PaymentformController extends Controller
     
     $user = User::find(auth()->user()->id);
         $data = $request->validate([
-            'bank_name'=>'nullable|string',
-            'account_no'=>'nullable|string|max:255',
+            'first_name'=>'nullable|string',
+            'last_name'=>'nullable|string|max:255',
+            'email'=>'nullable|email|max:255',
+            'phone_number'=>'nullable|string|',
             'value'=>'nullable|string|max:255'
         ]);
 
@@ -23,16 +25,20 @@ class PaymentformController extends Controller
         ]);
            
         $paymentmethod = PaymentMethod::create([
-            "bank_name" => $data['bank_name'],
-            "account_no" => $data['account_no'],
+            "first_name" => $data['first_name'],
+            "last_name" => $data['last_name'],
+            "email" => $data['email'],
+            "phone_number" => $data['phone_number'],
             "payment_type_id" =>$paymenttype->id,
             "user_id"=>$user->id
         ]);
 
         $response = [
             "message" => "granted",
-            "bank_name" => $paymentmethod->bank_name,
-            "account_no" => $paymentmethod->account_no,
+            "first_name" => $paymentmethod->first_name,
+            "last_name" => $paymentmethod->last_name,
+            "email" => $paymentmethod->email,
+            "phone_number" => $paymentmethod->phone_number,
             "value" => $paymenttype->value
         ];
 

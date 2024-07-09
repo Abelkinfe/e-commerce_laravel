@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductcardController;
 use App\Http\Controllers\ProductcardlistController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductlinkController;
+use App\Http\Controllers\SelectCategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\User;
 use App\Http\Controllers\UserAuth;
@@ -21,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Content;
 use App\Http\Controllers\Register;
+use App\Http\Controllers\ChapapayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,5 +52,7 @@ Route::middleware(['auth:sanctum'])->get('productcardlist', [ProductcardlistCont
 Route::middleware(['auth:sanctum'])->get('/productlink', [ProductlinkController::class, 'productlink']);
 Route::post('address', [AddressController::class, 'address']);
 Route::get('/detailfor/{category_id}', [DetailforController::class, 'detailfor']);
-Route::middleware(['auth:sanctum'])->post('/transactions/initialize', [DetailpayController::class, 'initializeTransaction']);
+Route::middleware(['auth:sanctum'])->post('/transactions', [DetailpayController::class, 'initializeTransaction']);
 Route::get('/paydetailproduct/{id}', [PayproductdetailController::class, 'paydetail']);
+Route::post('/chapa', [ChapapayController::class, 'initializeTransaction']);
+Route::get('/main-categories', [SelectCategoryController::class, 'getMainCategories']);
