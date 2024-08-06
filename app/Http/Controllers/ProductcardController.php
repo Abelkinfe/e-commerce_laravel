@@ -15,14 +15,17 @@ class ProductcardController extends Controller
             ->take(4)
             ->get(['id', 'name', 'product_img']);
 
+          
         
         $data = $products->map(function($product) {
             $latestProductItem = $product->productItems->first(); 
             return [
+               
                 'name' => $product->name,
                 'image' => $product->product_img,
                 'qty_instock' => $latestProductItem->qty_instock,
                 'price' => $latestProductItem->price,
+
             ];
         });
 

@@ -36,7 +36,7 @@ public function register(Request $request){
        $token = $user->createToken('personal token');
        $plaintext = $token->plainTextToken;
 
-       // Return user details and token
+       
        return response()->json([
            'user' => $user,
            'token' => $plaintext,

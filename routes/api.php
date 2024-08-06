@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CardlistController;
+use App\Http\Controllers\CartuserController;
 use App\Http\Controllers\DetailforController;
 use App\Http\Controllers\DetailpayController;
 use App\Http\Controllers\EditController;
@@ -14,7 +15,9 @@ use App\Http\Controllers\ProductcardController;
 use App\Http\Controllers\ProductcardlistController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductlinkController;
+use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\SelectCategoryController;
+use App\Http\Controllers\ShoppingcartController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\User;
 use App\Http\Controllers\UserAuth;
@@ -56,3 +59,9 @@ Route::middleware(['auth:sanctum'])->post('/transactions', [DetailpayController:
 Route::get('/paydetailproduct/{id}', [PayproductdetailController::class, 'paydetail']);
 Route::post('/chapa', [ChapapayController::class, 'initializeTransaction']);
 Route::get('/main-categories', [SelectCategoryController::class, 'getMainCategories']);
+Route::get('/search', [ProductSearchController::class, 'search']);
+Route::post('/cart/add', [ShoppingcartController::class, 'addToCart']);
+Route::get('/cart/{user_id}', [ShoppingcartController::class, 'getCartDetails']);
+Route::middleware(['auth:sanctum'])->get('/cartuser', [CartuserController::class, 'cartuser']);
+Route::delete('/cart/delete', [ShoppingcartController::class, 'deleteFromCart']);
+Route::get('/paymentmethod', [PaymentformController::class, 'getPaymentMethod']);

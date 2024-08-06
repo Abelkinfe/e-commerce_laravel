@@ -25,7 +25,7 @@ class ProductlinkController extends Controller
 
         foreach ($parentCategories as $parentCategoryId => $categoryName) {
             $categories = Category::where('parent_category_id', $parentCategoryId)->pluck('id');
-            $products = Product::whereIn('category_id', $categories)->get(['name', 'product_img']);
+            $products = Product::whereIn('category_id', $categories)->get(['name', 'product_img','category_id']);
 
             $result[$categoryName] = $products;
         }

@@ -40,7 +40,8 @@ class DetailpayController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'tx_ref' => $tx_ref
+            'tx_ref' => $tx_ref,
+            'transaction_id' => $transaction->id
         ]);
     }
 }

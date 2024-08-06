@@ -12,12 +12,16 @@ class VarietyOption extends Model
     public function variety(){
         return $this->belongsTo(Variety::class);
     }
-    public function productitem(){
-        return $this->belongsToMany(ProductItem::class);
-    }
+    // public function productitem(){
+    //     return $this->belongsToMany(ProductItem::class);
+    // }
     public function configItemProducts()
     {
         return $this->hasMany(ConfigItemProduct::class);
+    }
+    public function productitem()
+    {
+        return $this->belongsToMany(ProductItem::class,'config_item_products');
     }
 }
  

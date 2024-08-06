@@ -9,7 +9,7 @@ class PaymentMethod extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['payment_type_id','bank_name','account_no'];
+    protected $fillable = ['first_name','last_name','email','phone_number','value','payment_type_id'];
     public function paymenttype(){
         return $this->belongsTo(PaymentType::class);
     }

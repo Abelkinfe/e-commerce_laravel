@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Routing\Controller; // Ensure this import is present
-
+use Illuminate\Routing\Controller; 
 class ChapapayController extends Controller
 {
     public function initializeTransaction(Request $request)

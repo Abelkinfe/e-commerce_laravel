@@ -12,14 +12,13 @@ class PaymentformController extends Controller
     
     $user = User::find(auth()->user()->id);
         $data = $request->validate([
-            'first_name'=>'nullable|string',
+            'first_name'=>'required|string',
             'last_name'=>'nullable|string|max:255',
             'email'=>'nullable|email|max:255',
             'phone_number'=>'nullable|string|',
             'value'=>'nullable|string|max:255'
         ]);
-
-
+       
         $paymenttype = PaymentType::firstOrCreate([
             "value" => $data['value']
         ]);
@@ -32,17 +31,41 @@ class PaymentformController extends Controller
             "payment_type_id" =>$paymenttype->id,
             "user_id"=>$user->id
         ]);
-
+        
         $response = [
-            "message" => "granted",
+           
             "first_name" => $paymentmethod->first_name,
             "last_name" => $paymentmethod->last_name,
             "email" => $paymentmethod->email,
             "phone_number" => $paymentmethod->phone_number,
-            "value" => $paymenttype->value
+            "value" => $paymenttype->value,
+            "user_id" => $user->id
         ];
 
         return response()->json($response);
 
+   }
+   public function getPaymentMethod(Request $request)
+   {
+           $user = User::find(auth()->user()->id);
+       $paymentmethod = PaymentMethod::latest()->first();
+
+       if ($paymentmethod) {
+        
+           $paymenttype = PaymentType::find($paymentmethod->payment_type_id);
+
+           $response = [
+               "first_name" => $paymentmethod->first_name,
+               "last_name" => $paymentmethod->last_name,
+               "email" => $paymentmethod->email,
+               "phone_number" => $paymentmethod->phone_number,
+               "value" => $paymenttype->value,
+               "user_id" => $user->id
+           ];
+
+           return response()->json($response);
+       } else {
+           return response()->json(['message' => 'No payment method found.'], 404);
+       }
    }
 }

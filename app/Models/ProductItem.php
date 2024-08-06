@@ -13,9 +13,9 @@ class ProductItem extends Model
 
         return $this->belongsTo(Product::class);
     }
-    public function varietyoptions(){
-        return $this->belongsToMany(VarietyOption::class);
-    }
+    // public function varietyoptions(){
+    //     return $this->belongsToMany(VarietyOption::class);
+    // }
     public function shoppingcartitem(){
 
         return $this->hasMany(ShoppingCartItem::class);
@@ -24,5 +24,12 @@ class ProductItem extends Model
     {
         return $this->hasMany(ConfigItemProduct::class);
     }
-
+    public function shoppingcart()
+    {
+        return $this->belongsToMany(ShoppingCart::class,'shopping_cart_items');
+    }
+    public function varietyoption()
+    {
+        return $this->belongsToMany(VarietyOption::class,'config_item_products');
+    }
 }
